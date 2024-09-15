@@ -1,0 +1,2 @@
+for d in ebooks_mobi/*/ ;do echo "$d" | sed 's/ebooks_mobi//g' | sed 's/\///g' | xargs -I {} sh -c "cd ebooks_mobi/'{}'; pwd; echo 'plik:'; echo '{}.txt' ;spis '{}.txt'; cat '{}.txt' | sed '/None\ None/d' > 'census_{}.txt'; soffice --headless --convert-to epub 'census_{}.txt'; ebook-convert 'census_{}.epub' 'census_{}.mobi'; ebook-meta 'census_{}.mobi' -a 'kindle census' -t {};cp 'census_{}.mobi' ../../census_mobi/ " ; done
+# xargs -I {} sh -c "cd {}; spis {}.txt" ; done
